@@ -1,71 +1,94 @@
-# Parallax
+# Flexicarousel
 
-Parallax. Moves stuff on scroll.
+A carousel that'll dynamically adapt its width: it will grow or shrink alongside a site that’s resizing via css media queries. Uses CSS3 transforms (or whatever CSS you desire) for its transitions.
 
-## Introduction
+##Introduction
 
-There are several ways to approach building a parallax effect on a site. Paul Lewis has <a href="http://www.html5rocks.com/en/tutorials/speed/parallax/">a great overview</a> on the popular techniques and their
-pros and cons. In brief:
+A carousel that maintains a strict separation of state and style; that is to say, the Javascript maintains the state of the carousel, while the CSS takes care of the presentation of this state. The state may be updated by swiping or dragging, or by interacting with the exposed API. Also, the carousel is fully responsive, and uses CSS -- not Javascript -- to manage its presentation across breakpoints.
 
-- **absolute positioning**: parallax is achieved via positioning elements absolutely (this technique also includes
-	positioning a background image attachment). In general, this is the absolute worst way to do parallax from a
-	performance point of view. Everything must be recalculated and re-painted on scroll, so avoid this if possible. The
-	upside: you can support IE8 this way.
-- **3D transforms**: how the code herein operates. We offload elements in their own render layer to the GPU for X- or
-	Y-transforms. _Almost_ the most efficient (see below), but still very flexible and easy to implement. Browsers need
-	to support transforms.
-- **canvas**: one fixed element background (a canvas), that animates on scroll. Elements are placed into the canvas and
-	moved about on scroll -- this is the most efficient, but difficult to implement (or impossible if you wish to use
-	existing DOM elements).
+###In Particular
+
+Very lightweight (~1.8 KB), and works on both mobile and desktop. This is a basic carousel that achieves a particular use-case -- a single slide at
+a time. Use whatever CSS you desire to control transitions (i.e. translate or opacity), while on mobile continuous control over a slide's position
+(ie. via dragging) are possible, emulating a native UI paradigm.
 
 ## Getting Started
-Download the [production version][min] or the [development version][max].
+Download the [production version][min] or the [development version][max]. Or the [jquery version][jquery].
 
-[min]: https://github.com/apathetic/parallax/blob/master/dist/parallax.min.js
-[max]: https://github.com/apathetic/parallax/blob/master/src/parallax.js
+[min]: https://github.com/apathetic/flexicarousel-2/blob/master/dist/flexicarousel.min.js
+[max]: https://github.com/apathetic/flexicarousel-2/blob/master/dist/flexicarousel.js
+[jquery]: https://github.com/apathetic/flexicarousel-2/blob/master/dist/jquery.flexicarousel.min.js
 
 Include the relevant scripts in your web page, and then:
 
 ```html
 <script>
-	window.onload = parallax.init({ el: '.parallax' });
+
+	// availble options
+	var options = {
+		activeClass: 'active',
+		beforeClass: 'before',
+		afterClass: 'after',
+		slideWrap: '.wrap',
+		slides: 'li',
+		infinite: true,
+		beforeSlide,		// function to execute before sliding
+		afterSlide,			// function to execute after sliding
+		noTouch: false		// if you'd like to disable the touch UI for whatever reason
+	};
+
+	// as a jQuery plugin
+	jQuery(function($) {
+		$('.carousel').carousel(
+			options
+		);
+	});
+
+	// or, without jquery if you prefer:
+	var container = document.querySelector('.carousel');
+	var carousel = new Carousel(container, options);
+
 </script>
 ```
 
-### Integration into your project
-You'll notice that this (by default) adds a property to the Global namespace. This isn't necessarily a bad thing;
-rather, the onus is now on you to do what you wish with it.
-
-If you're using a build script (ie. Grunt, Gulp), you can [_deglobalify_][deglobalify] and [_browserify_][browserify],
-for example, and deal with the ```parallax``` object as you'd wish. See [this article][article] on Browserify for more
-info.
-
-[deglobalify]: https://www.npmjs.org/package/deglobalify
-[browserify]: https://www.npmjs.org/package/grunt-browserify
-[article]: http://dontkry.com/posts/code/browserify-and-the-universal-module-definition.html
-
-
 ## Documentation
-Elements on the page can have different attributes, as referenced through particular data-atrributes. For example:
 
-```html
-<div class="parallax item" data-parallax-speed="1"></div>
-```
+	next: advances the carousel by one slide
+
+	prev: returns to the previous slide
+
+	go: function(to) advances slide to the index
 
 
 ## Support
-* IE9+
+* IE8+
 * Safari / Chrome
 * Firefox
+* iOS
+* Android
 
 ## Known Issues
+* mobile transforms are currently webkit-only
 
 ## Examples
 
-Please see the _demo_ directory
+Please see the _test / demo_ directory
 
 ## Release History
 
+### 0.3
+* Fixed: when snapping back to _same_ slide, prev / next slides were not getting class="animate"
+* Fixed: uses ecma5 js (ie. bind, forEach). ==> added IE8 check
+
+### 0.2
+* add tabs demo
+* Fixed: uses non-IE8 friendly class manipulation (ie. classList)
+* Fixed: if mobile and not infinite, can see wrapping slides
 
 ### 0.1
-* initial commit
+* still a proof of concept
+* uses ecma5 js (ie. bind, forEach)
+* uses non-IE8 friendly class manipulation (ie. classList)
+* uses non-IE8 friendly translate on slides
+* mobile transforms are currently webkit-only
+* if mobile and not infinite, can see wrapping slides
