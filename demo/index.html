@@ -2,42 +2,37 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Parallax</title>
-    <meta name="viewport" content="width=device-width">
-	<link rel="stylesheet" href="styles.css">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>Navigator</title>
+	<meta name="viewport" content="width=device-width">
 
+	<link rel="stylesheet" href="styles.css">
+	<link rel="stylesheet" href="../src/panel-styles.css">
 	<script src="../dist/nav.min.js"></script>
+
+	<!-- demo stuffs -->
+	<link rel="stylesheet" href="showcase-styles.css">
+	<script src="https://cdn.rawgit.com/apathetic/stickynav/master/dist/stickynav.min.js"></script>
 	<script>
 		window.addEventListener('DOMContentLoaded', function() {
-			var navContainer = document.querySelector('.scroller');
-			var navSteps = document.querySelectorAll('.demo-nav li');
-			var navigation = new Nav(navContainer, {
-				slides: ".panel",
-				onSlide: function(to, from){
-					navSteps[from].className = '';
-					navSteps[to].className = 'active';
-				}
-			});
-
-			Array.prototype.forEach.call(navSteps, function(item, index){
-				item.addEventListener('click', function(e) {
-					e.preventDefault();
-					navigation.go(index);
-				});
-			});
-
-
+			stickyNav.init({ nav: '#sticky' });
 		});
 	</script>
+	<!-- end demo stuffs -->
+
 
 </head>
 
 <body>
+
+	<header>
+		<h1>Navigator.</h1>
+	</header>
+
 	<nav>
-		<div class="container">
-			<div id="sticky">
+		<div id="sticky">
+			<div class="container">
 				<nav data-autogenerate="true">
 					<ul></ul>
 				</nav>
@@ -45,107 +40,312 @@
 		</div>
 	</nav>
 
-	<main class="site">
-
+	<main class="site left-rail">
 		<section data-nav="About" id="about">
-			<h2>About</h2>
-			<p>Navigator. Animate through some panels.</p>
-
-
+			<div class="container">
+				<h2>About</h2>
+				<p>Navigator. Animate through some panels.</p>
+			</div>
 		</section>
 
 		<section data-nav="Download" id="download" >
-			<h2>Download</h2>
-			<h3>Stash</h3>
-			<p><a href="https://stash.hugeinc.com/projects/CMPTS/repos/parallax/browse">Get it from the Stash repo</a></p>
+			<div class="container">
+				<h2>Download</h2>
+				<h3>Stash</h3>
+				<p><a href="https://stash.hugeinc.com/projects/CMPTS/repos/parallax/browse">Get it from the Stash repo</a></p>
+			</div>
 		</section>
 
 		<section data-nav="Demo" id="demo">
-			<h2>Demo</h2>
+			<div class="container">
+				<h2>Demo</h2>
 
-			<nav class="demo-nav">
-				<ul>
-					<li class="active"><i class="icon icon-camera"></i></li>
-					<li><i class="icon icon-comment"></i></li>
-					<li><i class="icon icon-eyes"></i></li>
-					<li><i class="icon icon-hair"></i></li>
-					<li><i class="icon icon-smiley"></i></li>
-				</ul>
-			</nav>
+				<div id="demo-one" class="carousel slide">
 
-			<div class="scroller">
-				<ul class="panels">
-					<li class="panel active">
-						<h3>Panel 1</h3>
-					</li>
-					<li class="panel">
-						<h3>Panel 2</h3>
-					</li>
-					<li class="panel">
-						<h3>Panel 3</h3>
-					</li>
-					<li class="panel">
-						<h3>Panel 4</h3>
-					</li>
-					<li class="panel">
-						<h3>Panel 5</h3>
-					</li>
-				</ul>
+					<nav class="demo-nav">
+						<ul>
+							<li class="active"><i class="icon icon-camera"></i></li>
+							<li><i class="icon icon-comment"></i></li>
+							<li><i class="icon icon-eyes"></i></li>
+							<li><i class="icon icon-hair"></i></li>
+							<li><i class="icon icon-smiley"></i></li>
+						</ul>
+					</nav>
+
+					<ul class="panels">
+						<li class="panel active">
+							<h3>Panel 1</h3>
+						</li>
+						<li class="panel">
+							<h3>Panel 2</h3>
+						</li>
+						<li class="panel">
+							<h3>Panel 3</h3>
+						</li>
+						<li class="panel">
+							<h3>Panel 4</h3>
+						</li>
+						<li class="panel">
+							<h3>Panel 5</h3>
+						</li>
+					</ul>
+
+					<script>
+						window.addEventListener('DOMContentLoaded', function() {
+							var navContainer = document.querySelector('#demo-one .panels');
+							var navSteps = document.querySelectorAll('.demo-nav li');
+							var navigation = new Nav(navContainer, {
+								slides: ".panel",
+								onSlide: function(to, from){
+									navSteps[from].className = '';
+									navSteps[to].className = 'active';
+								}
+							});
+
+							Array.prototype.forEach.call(navSteps, function(item, index){
+								item.addEventListener('click', function(e) {
+									e.preventDefault();
+									navigation.go(index);
+								});
+							});
+						});
+					</script>
+
+				</div>
+
+
+
+
+
+				<h3>Sliding transition</h3>
+				<div id="one" class="carousel slide">
+					<ul class="wrap">
+						<li class="active"><span>1</span><img src="http://lorempixel.com/800/480/nature/1" alt="" /></li>
+						<li><span>2</span><img src="http://lorempixel.com/800/480/nature/2" alt="" /></li>
+						<li><span>3</span><img src="http://lorempixel.com/800/480/nature/3" alt="" /></li>
+						<li><span>4</span><img src="http://lorempixel.com/800/480/nature/4" alt="" /></li>
+					</ul>
+
+					<a href="#prev" class="prev" aria-hidden="true">Prev</a>
+					<a href="#next" class="next" aria-hidden="true">Next</a>
+
+					<nav class="indicators">
+						<span class="active"></span>
+						<span></span>
+						<span></span>
+						<span></span>
+					</nav>
+				</div>
+
+				<hr />
+
+				<h3>Fade transition</h3>
+				<div id="two" class="carousel fade">
+					<ul class="wrap">
+						<li class="active"><span>1</span><img src="http://lorempixel.com/800/480/nature/1" alt="" /></li>
+						<li><span>2</span><img src="http://lorempixel.com/800/480/nature/2" alt="" /></li>
+						<li><span>3</span><img src="http://lorempixel.com/800/480/nature/3" alt="" /></li>
+						<li><span>4</span><img src="http://lorempixel.com/800/480/nature/4" alt="" /></li>
+					</ul>
+
+					<a href="#prev" class="prev" aria-hidden="true">Prev</a>
+					<a href="#next" class="next" aria-hidden="true">Next</a>
+				</div>
+
+				<hr />
+
+				<h3>Multiple transitions (not infinite)</h3>
+				<div id="three" class="carousel fade slide">
+					<ul class="wrap">
+						<li class="active"><span>1</span><img src="http://lorempixel.com/800/480/nature/1" alt="" /></li>
+						<li><span>2</span><img src="http://lorempixel.com/800/480/nature/2" alt="" /></li>
+						<li><span>3</span><img src="http://lorempixel.com/800/480/nature/3" alt="" /></li>
+						<li><span>4</span><img src="http://lorempixel.com/800/480/nature/4" alt="" /></li>
+					</ul>
+
+					<a href="#prev" class="prev" aria-hidden="true">Prev</a>
+					<a href="#next" class="next" aria-hidden="true">Next</a>
+				</div>
+
+				<hr />
+
+				<h3>Tabs</h3>
+				<div id="four" class="carousel tabs">
+					<ul class="wrap">
+						<li class="active"><span>1</span><img src="http://lorempixel.com/800/480/nature/1" alt="" /></li>
+						<li><span>2</span><img src="http://lorempixel.com/800/480/nature/2" alt="" /></li>
+						<li><span>3</span><img src="http://lorempixel.com/800/480/nature/3" alt="" /></li>
+						<li><span>4</span><img src="http://lorempixel.com/800/480/nature/4" alt="" /></li>
+					</ul>
+
+					<nav>
+						<div class="active">one</div>
+						<div>two</div>
+						<div>three</div>
+						<div>four</div>
+					</nav>
+				</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 			</div>
-
 		</section>
 
 		<section data-nav="Prereqs" id="prereqs">
-			<h2>Prereqs</h2>
-			<p>none.</p>
+			<div class="container">
+				<h2>Prereqs</h2>
+				<p>none.</p>
+			</div>
 		</section>
 
 		<section data-nav="Compatibility" id="compatibility">
-			<h2>Compatibility</h2>
-			<ul>
-				<li>IE9+</li>
-				<li>Firefox, Webkit, Opera</li>
-				<li>no mobile</li>
-			</ul>
+			<div class="container">
+				<h2>Compatibility</h2>
+				<ul>
+					<li>IE9+</li>
+					<li>Firefox, Webkit, Opera</li>
+					<li>no mobile</li>
+				</ul>
+			</div>
 		</section>
 
 		<section data-nav="Code" id="code">
-			<h2>Code</h2>
+			<div class="container">
+				<h2>Code</h2>
+			</div>
 		</section>
 
 		<section data-nav="Options" id="options">
-			<h2>Options</h2>
-			<div class="table-responsive">
-				<table class="table table-bordered table-striped">
-					<thead>
-						<tr>
-							<th style="width: 100px;">Name</th>
-							<th style="width: 50px;">type</th>
-							<th style="width: 50px;">default</th>
-							<th>description</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>slides</td>
-							<td>string</td>
-							<td>none</td>
-							<td>querySelectorselector of panel elements</td>
-						</tr>
-						<tr>
-							<td>onSlide</td>
-							<td>function</td>
-							<td>none</td>
-							<td>Callback function on slide. Arguments are to and from</td>
-						</tr>
-					</tbody>
-				</table>
+			<div class="container">
+				<h2>Options</h2>
+				<div class="table-responsive">
+					<table class="table table-bordered table-striped">
+						<thead>
+							<tr>
+								<th style="width: 100px;">Name</th>
+								<th style="width: 50px;">type</th>
+								<th style="width: 50px;">default</th>
+								<th>description</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>slides</td>
+								<td>string</td>
+								<td>none</td>
+								<td>querySelectorselector of panel elements</td>
+							</tr>
+							<tr>
+								<td>onSlide</td>
+								<td>function</td>
+								<td>none</td>
+								<td>Callback function on slide. Arguments are to and from</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
 			</div>
 		</section>
 
 	</main>
 
+	<footer>
+		<div class="container">
+		</div>
+	</footer>
 
+	<script>
+	window.addEventListener('DOMContentLoaded', function() {
+		/*
+
+
+
+
+
+
+
+
+
+			var container2 = document.querySelector('#two');
+			var car2 = new Carousel(container2);
+
+			container2.querySelector('.prev').addEventListener('click', function(e){
+				e.preventDefault();
+				car2.prev();
+			});
+
+			container2.querySelector('.next').addEventListener('click', function(e){
+				e.preventDefault();
+				car2.next();
+			});
+
+
+			// ------------------------------------------------------------------
+			// multiple transitions
+
+			var container3 = document.querySelector('#three');
+			var car3 = new Carousel(container3, {
+				'infinite': false
+			});
+
+			container3.querySelector('.prev').addEventListener('click', function(e){
+				e.preventDefault();
+				car3.prev();
+			});
+
+			container3.querySelector('.next').addEventListener('click', function(e){
+				e.preventDefault();
+				car3.next();
+			});
+
+
+			// ------------------------------------------------------------------
+			// tabs
+
+			var tabs = $('#four nav div');
+			var container4 = document.querySelector('#four');
+			var car4 = new Carousel(container4);
+
+			tabs.each(function(i){
+				$(this).click(function() {
+					car4.go(i);
+					tabs.removeClass();
+					tabs.eq(i).addClass('active');
+				});
+			});
+
+
+
+			*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		});
+	</script>
 
 </body>
 
