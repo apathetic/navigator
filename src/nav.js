@@ -10,7 +10,7 @@ var Nav = function(container, options) {
 		beforeClass: 'before',
 		afterClass: 'after',
 		animateClass: 'animating',
-		slides: '.step',
+		slides: '.slide',
 		speed: 400
 	};
 
@@ -18,7 +18,7 @@ var Nav = function(container, options) {
 	this.container = (typeof container === 'string') ? document.querySelector(container) : container;
 	this.slides = this.container.querySelectorAll(this.options.slides);
 
-	if ( !this.slides ) { return; }
+	if ( !this.slides.length ) { return; }
 
 	this.current = 0;
 };
