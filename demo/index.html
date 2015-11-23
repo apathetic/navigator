@@ -13,6 +13,7 @@
 
 	<!-- demo stuffs -->
 	<link rel="stylesheet" href="showcase-styles.css">
+	<script src="prism.js"></script>
 	<script src="https://cdn.rawgit.com/apathetic/stickynav/master/dist/stickynav.min.js"></script>
 	<script>
 		window.addEventListener('DOMContentLoaded', function() {
@@ -60,17 +61,7 @@
 			<div class="container">
 				<h2>Demo</h2>
 
-				<div id="demo-one" class="carousel slide">
-
-					<nav class="demo-nav">
-						<ul>
-							<li class="active"><i class="icon icon-camera"></i></li>
-							<li><i class="icon icon-comment"></i></li>
-							<li><i class="icon icon-eyes"></i></li>
-							<li><i class="icon icon-hair"></i></li>
-							<li><i class="icon icon-smiley"></i></li>
-						</ul>
-					</nav>
+				<div id="demo-one" class="carousel fx-slide">
 
 					<ul class="panels">
 						<li class="panel active">
@@ -90,19 +81,30 @@
 						</li>
 					</ul>
 
+					<nav class="demo-nav">
+						<ul>
+							<li class="active"><i class="icon icon-camera"></i></li>
+							<li><i class="icon icon-comment"></i></li>
+							<li><i class="icon icon-eyes"></i></li>
+							<li><i class="icon icon-hair"></i></li>
+							<li><i class="icon icon-smiley"></i></li>
+						</ul>
+					</nav>
+
 					<script>
 						window.addEventListener('DOMContentLoaded', function() {
-							var navContainer = document.querySelector('#demo-one .panels');
-							var navSteps = document.querySelectorAll('.demo-nav li');
-							var navigation = new Nav(navContainer, {
+							var container = document.querySelector('#demo-one .panels');
+							var bullets = document.querySelectorAll('#demo-one nav li');
+							var navigation = new Nav(container, {
 								slides: ".panel",
 								onSlide: function(to, from){
-									navSteps[from].className = '';
-									navSteps[to].className = 'active';
+									bullets[from].className = '';
+									bullets[to].className = 'active';
 								}
 							});
 
-							Array.prototype.forEach.call(navSteps, function(item, index){
+
+							Array.prototype.forEach.call(bullets, function(item, index){
 								item.addEventListener('click', function(e) {
 									e.preventDefault();
 									navigation.go(index);
@@ -113,92 +115,133 @@
 
 				</div>
 
+				<pre><code class="language-javascript">
+// set up Nav
+var container = document.querySelector('#demo-one .panels');
+var bullets = document.querySelectorAll('#demo-one nav li');
+var navigation = new Nav(container, {
+	slides: ".panel",
+	onSlide: function(to, from){
+		bullets[from].className = '';
+		bullets[to].className = 'active';
+	}
+});
+
+// set up navigation UI
+Array.prototype.forEach.call(bullets, function(item, index){
+	item.addEventListener('click', function(e) {
+		e.preventDefault();
+		navigation.go(index);
+	});
+});
+				</pre></code>
 
 
 
 
 				<h3>Sliding transition</h3>
-				<div id="one" class="carousel slide">
-					<ul class="wrap">
-						<li class="active"><span>1</span><img src="http://lorempixel.com/800/480/nature/1" alt="" /></li>
-						<li><span>2</span><img src="http://lorempixel.com/800/480/nature/2" alt="" /></li>
-						<li><span>3</span><img src="http://lorempixel.com/800/480/nature/3" alt="" /></li>
-						<li><span>4</span><img src="http://lorempixel.com/800/480/nature/4" alt="" /></li>
+				<div id="demo-two" class="carousel fx-slide">
+					<ul class="panels">
+						<li class="active panel"><span>1</span><img src="img1.jpg" alt="" /></li>
+						<li class="panel"><span>2</span><img src="img2.jpg" alt="" /></li>
+						<li class="panel"><span>3</span><img src="img3.jpg" alt="" /></li>
+						<li class="panel"><span>4</span><img src="img4.jpg" alt="" /></li>
 					</ul>
 
-					<a href="#prev" class="prev" aria-hidden="true">Prev</a>
-					<a href="#next" class="next" aria-hidden="true">Next</a>
-
-					<nav class="indicators">
-						<span class="active"></span>
-						<span></span>
-						<span></span>
-						<span></span>
+					<nav>
+						<!-- <a href="#prev" class="prev" aria-hidden="true">Prev</a> -->
+						<ul>
+							<li class="active"></li>
+							<li></li>
+							<li></li>
+							<li></li>
+						</ul>
+						<!-- <a href="#next" class="next" aria-hidden="true">Next</a> -->
 					</nav>
+
+					<script>
+						window.addEventListener('DOMContentLoaded', function() {
+							var container = document.querySelector('#demo-two .panels');
+							var bullets = document.querySelectorAll('#demo-two nav li');
+							// var prev = document.querySelector('#demo-two .prev');
+							// var next = document.querySelector('#demo-two .next');
+
+							var navigation = new Nav(container, {
+								slides: ".panel",
+								onSlide: function(to, from){
+									bullets[from].className = '';
+									bullets[to].className = 'active';
+								}
+							});
+
+							Array.prototype.forEach.call(bullets, function(item, index){
+								item.addEventListener('click', function(e) {
+									e.preventDefault();
+									navigation.go(index);
+								});
+							});
+
+							// prev.addEventListener('click', function(e) {
+							// 	e.preventDefault();
+							// 	navigation.go(navigation.current - 1);
+							// });
+							//
+							// next.addEventListener('click', function(e) {
+							// 	e.preventDefault();
+							// 	navigation.go(navigation.current + 1);
+							// });
+
+						});
+					</script>
+
+
 				</div>
 
 				<hr />
 
 				<h3>Fade transition</h3>
-				<div id="two" class="carousel fade">
-					<ul class="wrap">
-						<li class="active"><span>1</span><img src="http://lorempixel.com/800/480/nature/1" alt="" /></li>
-						<li><span>2</span><img src="http://lorempixel.com/800/480/nature/2" alt="" /></li>
-						<li><span>3</span><img src="http://lorempixel.com/800/480/nature/3" alt="" /></li>
-						<li><span>4</span><img src="http://lorempixel.com/800/480/nature/4" alt="" /></li>
-					</ul>
-
-					<a href="#prev" class="prev" aria-hidden="true">Prev</a>
-					<a href="#next" class="next" aria-hidden="true">Next</a>
-				</div>
-
-				<hr />
-
-				<h3>Multiple transitions (not infinite)</h3>
-				<div id="three" class="carousel fade slide">
-					<ul class="wrap">
-						<li class="active"><span>1</span><img src="http://lorempixel.com/800/480/nature/1" alt="" /></li>
-						<li><span>2</span><img src="http://lorempixel.com/800/480/nature/2" alt="" /></li>
-						<li><span>3</span><img src="http://lorempixel.com/800/480/nature/3" alt="" /></li>
-						<li><span>4</span><img src="http://lorempixel.com/800/480/nature/4" alt="" /></li>
-					</ul>
-
-					<a href="#prev" class="prev" aria-hidden="true">Prev</a>
-					<a href="#next" class="next" aria-hidden="true">Next</a>
-				</div>
-
-				<hr />
-
-				<h3>Tabs</h3>
-				<div id="four" class="carousel tabs">
-					<ul class="wrap">
-						<li class="active"><span>1</span><img src="http://lorempixel.com/800/480/nature/1" alt="" /></li>
-						<li><span>2</span><img src="http://lorempixel.com/800/480/nature/2" alt="" /></li>
-						<li><span>3</span><img src="http://lorempixel.com/800/480/nature/3" alt="" /></li>
-						<li><span>4</span><img src="http://lorempixel.com/800/480/nature/4" alt="" /></li>
+				<div id="demo-three" class="carousel fx-fade">
+					<ul class="panels">
+						<li class="active panel"><span>1</span><img src="img1.jpg" alt="" /></li>
+						<li class="panel"><span>2</span><img src="img2.jpg" alt="" /></li>
+						<li class="panel"><span>3</span><img src="img3.jpg" alt="" /></li>
+						<li class="panel"><span>4</span><img src="img4.jpg" alt="" /></li>
 					</ul>
 
 					<nav>
-						<div class="active">one</div>
-						<div>two</div>
-						<div>three</div>
-						<div>four</div>
+						<a href="#prev" class="prev" aria-hidden="true">Prev</a>
+						<ul>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+						</ul>
+						<a href="#next" class="next" aria-hidden="true">Next</a>
 					</nav>
 				</div>
 
+				<hr />
 
+				<h3>Multiple transitions</h3>
+				<div id="demo-four" class="carousel fx-fade fx-slide">
+					<ul class="panels">
+						<li class="active panel"><span>1</span><img src="img1.jpg" alt="" /></li>
+						<li class="panel"><span>2</span><img src="img2.jpg" alt="" /></li>
+						<li class="panel"><span>3</span><img src="img3.jpg" alt="" /></li>
+						<li class="panel"><span>4</span><img src="img4.jpg" alt="" /></li>
+					</ul>
 
-
-
-
-
-
-
-
-
-
-
-
+					<nav>
+						<a href="#prev" class="prev" aria-hidden="true">Prev</a>
+						<ul>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+						</ul>
+						<a href="#next" class="next" aria-hidden="true">Next</a>
+					</nav>
+				</div>
 
 			</div>
 		</section>
@@ -275,60 +318,56 @@
 
 
 
+*/
 
 
 
-			var container2 = document.querySelector('#two');
-			var car2 = new Carousel(container2);
 
-			container2.querySelector('.prev').addEventListener('click', function(e){
-				e.preventDefault();
-				car2.prev();
+			// ------------------------------------------------------------------
+			// Fade transition
+
+			var container3 = document.querySelector('#demo-three .panels');
+			var bullets3 = document.querySelectorAll('#demo-three nav li');
+			var nav3 = new Nav(container3, {
+				slides: ".panel",
+				onSlide: function(to, from){
+					bullets3[from].className = '';
+					bullets3[to].className = 'active';
+				}
 			});
 
-			container2.querySelector('.next').addEventListener('click', function(e){
-				e.preventDefault();
-				car2.next();
+			Array.prototype.forEach.call(bullets3, function(item, index){
+				item.addEventListener('click', function(e) {
+					e.preventDefault();
+					nav3.go(index);
+				});
 			});
 
 
 			// ------------------------------------------------------------------
-			// multiple transitions
+			// Multiple transitions
 
-			var container3 = document.querySelector('#three');
-			var car3 = new Carousel(container3, {
-				'infinite': false
+			var container4 = document.querySelector('#demo-four .panels');
+			var bullets4 = document.querySelectorAll('#demo-four nav li');
+			var nav4 = new Nav(container4, {
+				slides: ".panel",
+				onSlide: function(to, from){
+					bullets4[from].className = '';
+					bullets4[to].className = 'active';
+				}
 			});
 
-			container3.querySelector('.prev').addEventListener('click', function(e){
-				e.preventDefault();
-				car3.prev();
-			});
-
-			container3.querySelector('.next').addEventListener('click', function(e){
-				e.preventDefault();
-				car3.next();
-			});
-
-
-			// ------------------------------------------------------------------
-			// tabs
-
-			var tabs = $('#four nav div');
-			var container4 = document.querySelector('#four');
-			var car4 = new Carousel(container4);
-
-			tabs.each(function(i){
-				$(this).click(function() {
-					car4.go(i);
-					tabs.removeClass();
-					tabs.eq(i).addClass('active');
+			Array.prototype.forEach.call(bullets4, function(item, index){
+				item.addEventListener('click', function(e) {
+					e.preventDefault();
+					nav4.go(index);
 				});
 			});
 
 
 
-			*/
+
+			/* */
 
 
 
