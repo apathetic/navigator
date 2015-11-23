@@ -1,23 +1,19 @@
-# Flexicarousel
+# Navigator
 
-A carousel that'll dynamically adapt its width: it will grow or shrink alongside a site that’s resizing via css media queries. Uses CSS3 transforms (or whatever CSS you desire) for its transitions.
+A sliding-panel, carousel-like component that transitions through a series of slides.
 
-##Introduction
+## Introduction
 
-A carousel that maintains a strict separation of state and style; that is to say, the Javascript maintains the state of the carousel, while the CSS takes care of the presentation of this state. The state may be updated by swiping or dragging, or by interacting with the exposed API. Also, the carousel is fully responsive, and uses CSS -- not Javascript -- to manage its presentation across breakpoints.
+This Navigator component can move through a series of slides using whatever CSS3 transitions you desire. Additionally,
+it'll dynamically adapt its width via CSS media queries.
 
-###In Particular
-
-Very lightweight (~1.8 KB), and works on both mobile and desktop. This is a basic carousel that achieves a particular use-case -- a single slide at
-a time. Use whatever CSS you desire to control transitions (i.e. translate or opacity), while on mobile continuous control over a slide's position
-(ie. via dragging) are possible, emulating a native UI paradigm.
+A strict separation of state and style is maintained. That is to say, the Javascript maintains the state of the Navigator, while the CSS takes care of the presentation of this state. While this is a basic component that achieves a particular use-case (i.e. a single slide at a time), you may use whatever CSS you desire to control the transition itself.
 
 ## Getting Started
-Download the [production version][min] or the [development version][max]. Or the [jquery version][jquery].
+Download the [production version][min] or the [development version][max].
 
-[min]: https://github.com/apathetic/flexicarousel-2/blob/master/dist/flexicarousel.min.js
-[max]: https://github.com/apathetic/flexicarousel-2/blob/master/dist/flexicarousel.js
-[jquery]: https://github.com/apathetic/flexicarousel-2/blob/master/dist/jquery.flexicarousel.min.js
+[min]: https://raw.githubusercontent.com/apathetic/navigator/master/dist/nav.min.js
+[max]: https://raw.githubusercontent.com/apathetic/navigator/master/src/nav.js
 
 Include the relevant scripts in your web page, and then:
 
@@ -29,50 +25,35 @@ Include the relevant scripts in your web page, and then:
 		activeClass: 'active',
 		beforeClass: 'before',
 		afterClass: 'after',
-		slideWrap: '.wrap',
-		slides: 'li',
-		infinite: true,
-		beforeSlide,		// function to execute before sliding
-		afterSlide,			// function to execute after sliding
-		noTouch: false		// if you'd like to disable the touch UI for whatever reason
+		animateClass: 'animating',
+		slides: '.step',
+		speed: 400
 	};
 
-	// as a jQuery plugin
-	jQuery(function($) {
-		$('.carousel').carousel(
-			options
-		);
-	});
-
-	// or, without jquery if you prefer:
-	var container = document.querySelector('.carousel');
-	var carousel = new Carousel(container, options);
+	// sample instantiation:
+	var container = document.querySelector('.panels');
+	var nav = new Nav(container, options);
 
 </script>
 ```
 
-## Documentation
+## Methods
 
-	next: advances the carousel by one slide
-
-	prev: returns to the previous slide
-
-	go: function(to) advances slide to the index
++ **next()** : advances the carousel by one slide
++ **prev()** : returns to the previous slide
++ **go()** : function(to) advances slide to the index
 
 
 ## Support
-* IE8+
+* IE9+
 * Safari / Chrome
 * Firefox
 * iOS
 * Android
 
-## Known Issues
-* mobile transforms are currently webkit-only
-
 ## Examples
 
-Please see the _test / demo_ directory
+Please see the _demo_ directory
 
 ## Release History
 
