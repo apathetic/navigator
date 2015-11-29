@@ -1,41 +1,87 @@
+.carousel {
+	margin-bottom: 2em;
+}
+
+.carousel .panels {
+	max-height: 360px;
+}
+
+.carousel h3 {
+	color: #fff;
+	text-align: center;
+	margin: 15%;
+}
+
 .demo-nav {
+	font-size: 0.5em;
+	position: static;
 	width: 100%;
 }
 
 .demo-nav ul {
-	font-size: 2.4em;
 	display: flex;
 	justify-content: space-between;
-	padding: 0.3em 0.5em;
-	border-bottom: 1px solid #eee;
+	padding: 1em;
+	width: 40%;
+    margin: 0 auto;
 }
 
 .demo-nav li {
 	cursor: pointer;
 	color: grey;
+	list-style: none;
+	margin: 0;
+	width: 1em;
+	height: 1em;
+	border-radius: 50%;
+	background: #ddd;
 }
 
 .demo-nav li.active {
-	color: blue;
+	background:#ec008c;
 }
+
+.demo-nav .prev,
+.demo-nav .next {
+	position: absolute;
+	top: 0;
+	width: 10%;
+	height: calc(100% - 3em);
+	background-color: rgba(0,0,0,0.3);
+	opacity: 0;
+	transition: opacity 0.3s;
+	text-align: center;
+	color: #fff;
+}
+
+.demo-nav .prev { left: 0; }
+.demo-nav .next { right: 0; }
+
+.carousel:hover .prev,
+.carousel:hover .next {
+	opacity: 1;
+}
+
+.demo-nav span {
+	font-size: 3em;
+	top: 40%;
+}
+
+
 
 /* -------------------------------------
 		DEMO ONE
 ------------------------------------- */
 
 #demo-one .panels {
-	height: 200px;
-	overflow-x: hidden;
+	/*height: 200px;*/
+	/*overflow-x: hidden;*/
 }
 
 #demo-one .panel {
-	position: absolute;
+	/*position: absolute;
 	top: 0;
-	bottom: 0;
-	width: 100%;
-	overflow: hidden;
-	/*height: 0;*/
-	/*background: white;*/
+	bottom: 0;*/
 }
 .panel:nth-child(1) {
 	background-color: blue;
@@ -61,31 +107,4 @@
 	background-color: green;
 	background-image: url('img5.jpg');
 	background-size: cover;
-}
-
-
-/*
-.panel.active {
-	opacity:1;
-	height: auto;
-}
-
-.panel.animating {
-	height: auto;
-	transition: transform 0.4s ease-in-out,
-				opacity 0.2s ease-in-out;
-}
-
-.panel.animating.active {
-	transform:	translateX(0);
-	transition: transform 0.4s ease-in-out,
-				opacity 0.2s ease-in-out 0.2s;
-}
-
-.panel.animating.before {
-	transform: translateX(-100%);
-}
-
-.panel.animating.after  {
-	transform: translateX(100%);
 }
