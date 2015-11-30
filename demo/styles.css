@@ -2,15 +2,23 @@
 	margin-bottom: 2em;
 }
 
-.carousel .panels {
+.panels {
 	max-height: 360px;
 }
+
+.panel { background-size: cover; }
+.panel:nth-child(1) { background-image: url('img1.jpg'); }
+.panel:nth-child(2) { background-image: url('img2.jpg'); }
+.panel:nth-child(3) { background-image: url('img3.jpg'); }
+.panel:nth-child(4) { background-image: url('img4.jpg'); }
 
 .carousel h3 {
 	color: #fff;
 	text-align: center;
 	margin: 15%;
 }
+
+
 
 .demo-nav {
 	font-size: 0.5em;
@@ -23,13 +31,15 @@
 	justify-content: space-between;
 	padding: 1em;
 	width: 40%;
+	max-width: 200px;
+	min-width: 100px;
     margin: 0 auto;
 }
 
 .demo-nav li {
 	cursor: pointer;
 	color: grey;
-	list-style: none;
+	list-style: none !important;
 	margin: 0;
 	width: 1em;
 	height: 1em;
@@ -65,46 +75,4 @@
 .demo-nav span {
 	font-size: 3em;
 	top: 40%;
-}
-
-
-
-/* -------------------------------------
-		DEMO ONE
-------------------------------------- */
-
-#demo-one .panels {
-	/*height: 200px;*/
-	/*overflow-x: hidden;*/
-}
-
-#demo-one .panel {
-	/*position: absolute;
-	top: 0;
-	bottom: 0;*/
-}
-.panel:nth-child(1) {
-	background-color: blue;
-	background-image: url('img1.jpg');
-	background-size: cover;
-}
-.panel:nth-child(2) {
-	background-color: purple;
-	background-image: url('img2.jpg');
-	background-size: cover;
-}
-.panel:nth-child(3) {
-	background-color: orange;
-	background-image: url('img3.jpg');
-	background-size: cover;
-}
-.panel:nth-child(4) {
-	background-color: red;
-	background-image: url('img4.jpg');
-	background-size: cover;
-}
-.panel:nth-child(5) {
-	background-color: green;
-	background-image: url('img5.jpg');
-	background-size: cover;
 }

@@ -32,7 +32,10 @@ Nav.prototype = {
 	go: function(to) {
 
 		if (to === this.current) { return; }
-		if (to < 0 || to >= this.slides.length) { return; }
+		if (to < 0 || to >= this.slides.length) {
+			// or, determine direction and
+			return;
+		}
 
 		var currentSlide = this.slides[this.current];
 		var nextSlide = this.slides[to];
