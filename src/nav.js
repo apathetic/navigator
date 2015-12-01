@@ -11,6 +11,7 @@ var Nav = function(container, options) {
 		afterClass: 'after',
 		animateClass: 'animating',
 		slides: '.slide',
+		infinite: true,
 		speed: 400
 	};
 
@@ -30,19 +31,32 @@ Nav.prototype = {
 	 * @return {void}
 	 */
 	go: function(to) {
+		var options = this.options,
+			currentSlide,
+			nextSlide,
+			direction;
 
-		if (to === this.current) { return; }
-		if (to < 0 || to >= this.slides.length) {
-			// or, determine direction and
-			return;
+		// determine direction:  1: backward, -1: forward. Do this before we % it
+		direction = Math.abs(this.current - to) / (this.current - to);
+
+		// calculate where we're going
+		if (this.options.infinite) {
+			to = (this.slides.length + (to % this.slides.length)) % this.slides.length;
+		} else {
+			to = Math.max( Math.min(this.slides.length-1, to), 0);
 		}
 
-		var currentSlide = this.slides[this.current];
-		var nextSlide = this.slides[to];
-		var options = this.options;
+		// dont do nuthin if we dont need to
+		if (to === this.current || this.sliding) { return; }
+
+		// Call onSlide function, if it exists. Note: doesn't check if is a function
+		if (options.onSlide) { options.onSlide.call(this, to, this.current); }
+
+		currentSlide = this.slides[this.current];
+		nextSlide = this.slides[to];
 
 		// prime the slides: position the ones we're going to and moving from
-		if (this.current > to) {
+		if (direction > 0) {
 			nextSlide.classList.add(options.beforeClass);
 			currentSlide.classList.add(options.afterClass);
 		} else {
@@ -53,9 +67,14 @@ Nav.prototype = {
 		// force a repaint to actually position "to" slide. *Important*
 		nextSlide.offsetHeight;	// jshint ignore:line
 
-		// Call onSlide function, if it exists. Note: doesn't check if is a function
-		if (options.onSlide) { options.onSlide.call(this, to, this.current); }
-
+	// 	this._transition();
+	// },
+	//
+	// /**
+	//  * Update slide classes to trigger transitioning
+	//  * @return {void}
+	//  */
+	// _transition: function() {
 		// start the transition
 		currentSlide.classList.add(options.animateClass);
 		nextSlide.classList.add(options.animateClass);
@@ -65,22 +84,19 @@ Nav.prototype = {
 		nextSlide.classList.remove(options.beforeClass);
 		nextSlide.classList.remove(options.afterClass);
 
+		// clean up afterwards
+		var options = this.options;
+		var slides = this.slides;
+		setTimeout(function() {
+			Array.prototype.forEach.call(slides, function(slide){
+				slide.classList.remove(options.animateClass);
+				slide.classList.remove(options.beforeClass);
+				slide.classList.remove(options.afterClass);
+			});
+		}, options.speed);
+
 		this.current = to;
 
-		setTimeout(this._update.bind(this), options.speed);
-	},
-
-	/**
-	 * Update slide classes when done animating
-	 * @return {void}
-	 */
-	_update: function() {
-		var options = this.options;
-		Array.prototype.forEach.call(this.slides, function(slide){
-			slide.classList.remove(options.animateClass);
-			slide.classList.remove(options.beforeClass);
-			slide.classList.remove(options.afterClass);
-		});
 	},
 
 	/**
