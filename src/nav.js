@@ -32,6 +32,7 @@ Nav.prototype = {
 	 */
 	go: function(to) {
 		var options = this.options,
+			slides = this.slides,
 			currentSlide,
 			nextSlide,
 			direction;
@@ -40,10 +41,10 @@ Nav.prototype = {
 		direction = Math.abs(this.current - to) / (this.current - to);
 
 		// calculate where we're going
-		if (this.options.infinite) {
-			to = (this.slides.length + (to % this.slides.length)) % this.slides.length;
+		if (options.infinite) {
+			to = (slides.length + (to % slides.length)) % slides.length;
 		} else {
-			to = Math.max( Math.min(this.slides.length-1, to), 0);
+			to = Math.max( Math.min(slides.length-1, to), 0);
 		}
 
 		// dont do nuthin if we dont need to
@@ -52,8 +53,21 @@ Nav.prototype = {
 		// Call onSlide function, if it exists. Note: doesn't check if is a function
 		if (options.onSlide) { options.onSlide.call(this, to, this.current); }
 
-		currentSlide = this.slides[this.current];
-		nextSlide = this.slides[to];
+
+		// 	this._transition(to, direction);
+		// },
+		//
+		// /**
+		//  * Update slide classes to trigger transitioning
+		//  * @return {void}
+		//  */
+		// _transition: function(to, direction) {
+		// var options = this.options;
+		// var slides = this.slides;
+
+
+		currentSlide = slides[this.current];
+		nextSlide = slides[to];
 
 		// prime the slides: position the ones we're going to and moving from
 		if (direction > 0) {
@@ -67,14 +81,6 @@ Nav.prototype = {
 		// force a repaint to actually position "to" slide. *Important*
 		nextSlide.offsetHeight;	// jshint ignore:line
 
-	// 	this._transition();
-	// },
-	//
-	// /**
-	//  * Update slide classes to trigger transitioning
-	//  * @return {void}
-	//  */
-	// _transition: function() {
 		// start the transition
 		currentSlide.classList.add(options.animateClass);
 		nextSlide.classList.add(options.animateClass);
@@ -85,14 +91,13 @@ Nav.prototype = {
 		nextSlide.classList.remove(options.afterClass);
 
 		// clean up afterwards
-		var options = this.options;
-		var slides = this.slides;
 		setTimeout(function() {
 			Array.prototype.forEach.call(slides, function(slide){
 				slide.classList.remove(options.animateClass);
 				slide.classList.remove(options.beforeClass);
 				slide.classList.remove(options.afterClass);
 			});
+			this.sliding = false;
 		}, options.speed);
 
 		this.current = to;
