@@ -12,12 +12,12 @@
 	<script src="../src/nav.js"></script>
 
 	<!-- demo stuffs -->
-	<link rel="stylesheet" href="https://rawgit.com/apathetic/showcase/master/www/css/styles.css">
+	<link rel="stylesheet" href="https://rawgit.com/apathetic/showcase/gh-pages/css/styles.css">
 	<script src="prism.js"></script>
-	<script src="https://rawgit.com/apathetic/stickynav/master/dist/stickynav.min.js"></script>
+	<script src="https://rawgit.com/apathetic/stickynav/master/dist/stickyNav.js"></script>
 	<script>
 		window.addEventListener('DOMContentLoaded', function() {
-			stickyNav.init({ nav: '#sticky' });
+			new stickyNav({ nav: '#sticky' });
 		});
 	</script>
 	<!-- end demo stuffs -->
@@ -63,7 +63,7 @@
 				<h2>Demo</h2>
 
 				<h3>Sliding transition</h3>
-				<div id="demo-one" class="carousel fx-slide">
+				<div id="demo-one" class="navigator fx-slide">
 
 					<ul class="panels">
 						<li class="panel active"><h3>Panel 1</h3></li>
@@ -124,7 +124,7 @@
 				<hr />
 
 				<h3>Fade transition</h3>
-				<div id="demo-three" class="carousel fx-fade">
+				<div id="demo-three" class="navigator fx-fade">
 					<ul class="panels">
 						<li class="panel active"><h3>Panel 1</h3></li>
 						<li class="panel"><h3>Panel 2</h3></li>
@@ -183,7 +183,7 @@
 				<hr />
 
 				<h3>Multiple transitions</h3>
-				<div id="demo-four" class="carousel fx-fade fx-slide">
+				<div id="demo-four" class="navigator fx-fade fx-slide">
 					<ul class="panels">
 						<li class="panel active"><h3>Panel 1</h3></li>
 						<li class="panel"><h3>Panel 2</h3></li>
@@ -249,7 +249,7 @@
 
 				<h5>Basic markup</h5>
 				<pre><code class="language-markup">
-	&lt;div id="demo" class="carousel fx-slide">
+	&lt;div id="demo" class="navigator fx-slide">
 		&lt;ul class="panels">
 			&lt;li class="panel">&lt;/li>
 			...

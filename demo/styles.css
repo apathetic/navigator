@@ -1,4 +1,4 @@
-.carousel {
+.navigator {
 	margin-bottom: 2em;
 }
 
@@ -12,7 +12,7 @@
 .panel:nth-child(3) { background-image: url('img3.jpg'); }
 .panel:nth-child(4) { background-image: url('img4.jpg'); }
 
-.carousel h3 {
+.navigator h3 {
 	color: #fff;
 	text-align: center;
 	margin: 15%;
