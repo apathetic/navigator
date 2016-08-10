@@ -12,12 +12,12 @@
 	<script src="../src/nav.js"></script>
 
 	<!-- demo stuffs -->
-	<link rel="stylesheet" href="https://rawgit.com/apathetic/showcase/master/www/css/styles.css">
+	<link rel="stylesheet" href="https://apathetic.github.io/showcase/assets/css/main.min.css">
+	<script src="https://rawgit.com/apathetic/stickynav/master/dist/stickyNav.js"></script>
 	<script src="prism.js"></script>
-	<script src="https://rawgit.com/apathetic/stickynav/master/dist/stickynav.min.js"></script>
 	<script>
 		window.addEventListener('DOMContentLoaded', function() {
-			stickyNav.init({ nav: '#sticky' });
+			new stickyNav({ nav: '#sticky' });
 		});
 	</script>
 	<!-- end demo stuffs -->
@@ -27,7 +27,7 @@
 
 <body>
 
-	<header>
+	<header class="condensed align-center">
 		<h1>Navigator.</h1>
 	</header>
 
@@ -72,15 +72,15 @@
 						<li class="panel"><h3>Panel 4</h3></li>
 					</ul>
 
-					<nav class="demo-nav">
-						<a href="#prev" class="prev" aria-hidden="true"> <span>&lang;</span> </a>
+					<nav class="carousel__nav">
+						<button class="prev">⟨</button>
 						<ul>
 							<li class="active"></li>
 							<li></li>
 							<li></li>
 							<li></li>
 						</ul>
-						<a href="#next" class="next" aria-hidden="true"> <span>&rang;</span> </a>
+						<button class="next">⟩</button>
 					</nav>
 
 					<script>
@@ -132,15 +132,15 @@
 						<li class="panel"><h3>Panel 4</h3></li>
 					</ul>
 
-					<nav class="demo-nav">
-						<a href="#prev" class="prev" aria-hidden="true"> <span>&lang;</span> </a>
+					<nav class="carousel__nav">
+						<button class="prev">⟨</button>
 						<ul>
 							<li class="active"></li>
 							<li></li>
 							<li></li>
 							<li></li>
 						</ul>
-						<a href="#next" class="next" aria-hidden="true"> <span>&rang;</span> </a>
+						<button class="next">⟩</button>
 					</nav>
 
 					<script>
@@ -191,15 +191,15 @@
 						<li class="panel"><h3>Panel 4</h3></li>
 					</ul>
 
-					<nav class="demo-nav">
-						<a href="#prev" class="prev" aria-hidden="true"> <span>&lang;</span> </a>
+					<nav class="carousel__nav">
+						<button class="prev">⟨</button>
 						<ul>
 							<li class="active"></li>
 							<li></li>
 							<li></li>
 							<li></li>
 						</ul>
-						<a href="#next" class="next" aria-hidden="true"> <span>&rang;</span> </a>
+						<button class="next">⟩</button>
 					</nav>
 				</div>
 
