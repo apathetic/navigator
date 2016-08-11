@@ -5,7 +5,7 @@
   "version": "0.1.0",
   "license": "MIT",
   "main": "./dist/panels.cjs.js",
-  "broswer": "./dist/panels.browser.js",
+  "broswer": "./dist/panels.js",
   "jsnext:main": "./dist/panels.es6.js",
   "repository": {
     "type": "git",

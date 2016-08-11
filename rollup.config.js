@@ -10,6 +10,6 @@ export default {
   targets: [
     { dest: 'dist/panels.cjs.js', format: 'cjs' },
     { dest: 'dist/panels.es6.js', format: 'es' },
-    { dest: 'dist/panels.browser.js', format: 'iife' }
+    { dest: 'dist/panels.js', format: 'iife' }
   ]
 };
