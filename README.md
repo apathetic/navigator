@@ -1,4 +1,4 @@
-# Navigator
+# Panels
 
 A sliding-panel, carousel-like component that transitions through a series of slides.
 
