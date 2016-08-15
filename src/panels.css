@@ -1,10 +1,10 @@
-.carousel .panels {
+.panels {
 	position:relative;
 	overflow:hidden;
 	list-style:none;
 }
 
-.carousel .panel {
+.panel {
 	position:absolute;
 	top:0;
 	left:0;
@@ -15,7 +15,7 @@
 	backface-visibility: hidden;
 }
 
-.carousel .panel.animating {
+.panel.animating {
 	height: auto !important;
 
 	/* out */
@@ -23,7 +23,7 @@
 				opacity 0.2s ease-in-out;
 }
 
-.carousel .panel.active {
+.panel.active {
 	height: auto !important;
 	position: relative;
 
