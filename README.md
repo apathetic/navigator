@@ -20,7 +20,7 @@ Include the relevant scripts in your web page, and then:
 ```html
 <script>
 
-	// availble options
+	// available options
 	var options = {
 		activeClass: 'active',
 		beforeClass: 'before',

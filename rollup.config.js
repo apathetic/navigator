@@ -1,15 +1,34 @@
 import buble from 'rollup-plugin-buble';
+import * as fs from 'fs';
+
+const license = fs.readFileSync('LICENSE', 'utf8');
+
 
 export default {
-  entry: 'src/panels.js',
-  moduleName: 'Panels',
-  plugins: [
-    buble()
-  ],
-
-  targets: [
-    { dest: 'dist/panels.cjs.js', format: 'cjs' },
-    { dest: 'dist/panels.es6.js', format: 'es' },
-    { dest: 'dist/panels.js', format: 'iife' }
+  input: 'src/panels.js',
+  output: [
+    {
+      file: 'dist/panels.cjs.js',
+      format: 'cjs',
+      banner: '/*\n' + license + '*/',
+      plugins: [
+        buble()
+      ]
+    }, {
+      file: 'dist/panels.es6.js',
+      format: 'es',
+      banner: '/*\n' + license + '*/',
+      plugins: [
+        buble()
+      ]
+    }, {
+      file: 'dist/panels.js',
+      format: 'iife',
+      name: 'Panels',
+      banner: '/*\n' + license + '*/',
+      plugins: [
+        buble()
+      ]
+    }
   ]
 };

@@ -1,14 +1,39 @@
-var Panels = (function () {
-  'use strict';
+/*
+MIT License
 
-  /**
-   * Simple Panels
-   * @constructor
-   * @param {[type]} container [description]
-   * @param {[type]} options   [description]
-   */
-  var Panels = function Panels(container, options) {
-    var defaults = {
+Copyright (c) 2017 wes hatch
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+*/
+var Panels = (function () {
+'use strict';
+
+/**
+ * Simple Panels
+ * @constructor
+ * @param {HTMLElement} container A DOM element that is a parent to the panels.
+ * @param {Object} options   Configuration options
+ */
+class Panels {
+
+  constructor(container, options) {
+    const defaults = {
       activeClass: 'active',
       beforeClass: 'before',
       afterClass: 'after',
@@ -24,26 +49,26 @@ var Panels = (function () {
     this.current = 0;
 
     if (!this.slides.length) { return; }
-  };;
+  };
 
   /**
    * Transition from one slide to another
-   * @param{integer} to The index of the slide to go to
+   * @param  {integer} to The index of the slide to go to
    * @return {void}
    */
-  Panels.prototype.go = function go (to) {
+  go(to) {
     var options = this.options,
       slides = this.slides,
       currentSlide,
       nextSlide,
       direction;
 
-    // determine direction:1: backward, -1: forward. Do this before we % it
+    // determine direction:  1: backward, -1: forward. Do this before we % it
     direction = Math.abs(this.current - to) / (this.current - to);
 
     // calculate where we're going
     if (options.infinite) {
-      to = (slides.length + (to % slides.length)) % slides.length;// eslint-disable-line no-extra-parens
+      to = (slides.length + (to % slides.length)) % slides.length;  // eslint-disable-line no-extra-parens
     } else {
       to = Math.max(Math.min(slides.length - 1, to), 0);
     }
@@ -68,7 +93,7 @@ var Panels = (function () {
     }
 
     // force a repaint to actually position "to" slide. *Important*
-    nextSlide.offsetHeight;// jshint ignore:line
+    nextSlide.offsetHeight;  // eslint-disable-line
 
     // start the transition
     currentSlide.classList.add(options.animateClass);
@@ -86,15 +111,14 @@ var Panels = (function () {
         slide.classList.remove(options.beforeClass);
         slide.classList.remove(options.afterClass);
       });
-
-      // this.sliding = false;
-
     }, options.speed);
 
     this.current = to;
 
-  };
+  }
 
-  return Panels;
+}
+
+return Panels;
 
 }());

@@ -1,8 +1,8 @@
 /**
  * Simple Panels
  * @constructor
- * @param {[type]} container [description]
- * @param {[type]} options   [description]
+ * @param {HTMLElement} container A DOM element that is a parent to the panels.
+ * @param {Object} options   Configuration options
  */
 export default class Panels {
 
@@ -67,7 +67,7 @@ export default class Panels {
     }
 
     // force a repaint to actually position "to" slide. *Important*
-    nextSlide.offsetHeight;  // jshint ignore:line
+    nextSlide.offsetHeight;  // eslint-disable-line
 
     // start the transition
     currentSlide.classList.add(options.animateClass);
@@ -85,32 +85,10 @@ export default class Panels {
         slide.classList.remove(options.beforeClass);
         slide.classList.remove(options.afterClass);
       });
-
-      // this.sliding = false;
-
     }, options.speed);
 
     this.current = to;
 
   }
-
-  // /**
-  //  * Helper function. Simple way to merge objects
-  //  * @param  {object} obj A list of objects to extend
-  //  * @return {object}     The extended object
-  //  */
-  // _extend: function(obj) {
-  //   var args = Array.prototype.slice.call(arguments, 1);
-  //   for (var i = 0; i < args.length; i++) {
-  //     let source = args[i];
-  //     if (source) {
-  //       for (var prop in source) {
-  //         obj[prop] = source[prop];
-  //       }
-  //     }
-  //   }
-  //   return obj;
-  // }
-  //
 
 };
