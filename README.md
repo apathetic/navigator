@@ -45,7 +45,7 @@ Include the relevant scripts in your web page, and then:
 
 
 ## Support
-* IE9+
+* IE9+ (although, now requires Object.assign polyfill)
 * Safari / Chrome
 * Firefox
 * iOS
