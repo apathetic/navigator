@@ -64,7 +64,7 @@
 				<h2>Demo</h2>
 
 				<h3>Sliding transition</h3>
-				<div id="demo-one" class="navigator fx-slide">
+				<div id="demo-one" class="navigator carousel fx-slide">
 
 					<ul class="panels">
 						<li class="panel active"><h3>Panel 1</h3></li>
@@ -127,7 +127,7 @@
 				<hr />
 
 				<h3>Fade transition</h3>
-				<div id="demo-three" class="navigator fx-fade">
+				<div id="demo-three" class="navigator carousel fx-fade">
 					<ul class="panels">
 						<li class="panel active"><h3>Panel 1</h3></li>
 						<li class="panel"><h3>Panel 2</h3></li>
@@ -155,7 +155,6 @@
 							var next3 = document.querySelector('#demo-three .next');
 							var nav3 = new Panels(container3, {
 								slides: ".panel",
-								infinite: false,
 								onSlide: function(to, from){
 									bullets3[from].className = '';
 									bullets3[to].className = 'active';
@@ -187,7 +186,7 @@
 				<hr />
 
 				<h3>Multiple transitions</h3>
-				<div id="demo-four" class="navigator fx-fade fx-slide">
+				<div id="demo-four" class="navigator carousel fx-fade fx-slide">
 					<ul class="panels">
 						<li class="panel active"><h3>Panel 1</h3></li>
 						<li class="panel"><h3>Panel 2</h3></li>
@@ -253,7 +252,7 @@
 
 				<h5>Basic markup</h5>
 				<pre><code class="language-markup">
-	&lt;div id="demo" class="navigator fx-slide">
+	&lt;div id="demo" class="navigator carousel fx-slide">
 		&lt;ul class="panels">
 			&lt;li class="panel">&lt;/li>
 			...

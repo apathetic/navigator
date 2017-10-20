@@ -24,6 +24,8 @@ export default class Panels {
     this.current = 0;
 
     if (!this.numSlides) { return; }
+
+    this.slides[0].classList.add(this.options.activeClass);
   };
 
   /**

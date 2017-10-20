@@ -1,26 +1,27 @@
 .panels {
-	position:relative;
-	overflow:hidden;
-	list-style:none;
+	position: relative;
+	overflow: hidden;
+	list-style: none;
 }
 
 .panel {
-	position:absolute;
-	top:0;
-	left:0;
-	width:100%;
-	margin:0;
-	overflow: hidden;
 	height: 0;
-	backface-visibility: hidden;
+	margin: 0;
+	overflow: hidden;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
 }
 
 .panel.animating {
 	height: auto !important;
+  /*position: relative;*/
 
 	/* out */
-	transition: transform 0.4s ease-in-out,
-				opacity 0.2s ease-in-out;
+	transition:
+			transform 0.4s ease-in-out,
+			opacity 0.2s ease-in-out;
 }
 
 .panel.active {
@@ -28,8 +29,7 @@
 	position: relative;
 
 	/* in */
-	transition: transform 0.4s ease-in-out,
-				opacity 0.2s ease-in-out 0.2s;
+	transition-delay: 0, 0.2s;
 
 }
 
@@ -40,19 +40,13 @@
 
 .fx-slide .panel,
 .fx-slide .panel.before {
-	-webkit-transform: translateX(-100%);
-        -ms-transform: translateX(-100%);
-            transform: translateX(-100%);
+	transform: translateX(-100%);
 }
 .fx-slide .panel.after {
-	-webkit-transform: translateX(100%);
-        -ms-transform: translateX(100%);
-            transform: translateX(100%);
+	transform: translateX(100%);
 }
 .fx-slide .panel.active {
- 	-webkit-transform: translateX(0);
-        -ms-transform: translateX(0);
-            transform: translateX(0);
+	transform: translateX(0);
 }
 
 
@@ -61,8 +55,8 @@
 ------------------------------------- */
 
 .fx-fade .active.panel {
-	opacity:1
+	opacity: 1
 }
 .fx-fade .panel {
-	opacity:0;
+	opacity: 0;
 }
