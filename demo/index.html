@@ -101,19 +101,21 @@
 
 							Array.prototype.forEach.call(bullets1, function(item, index){
 								item.addEventListener('click', function(e) {
-									e.preventDefault();
+									// e.preventDefault();
 									navigation1.go(index);
 								});
 							});
 
 							prev1.addEventListener('click', function(e) {
-								e.preventDefault();
-								navigation1.go(navigation1.current - 1);
+								// e.preventDefault();
+								// navigation1.go(navigation1.current - 1);
+								navigation1.prev();
 							});
 
 							next1.addEventListener('click', function(e) {
-								e.preventDefault();
-								navigation1.go(navigation1.current + 1);
+								// e.preventDefault();
+								// navigation1.go(navigation1.current + 1);
+								navigation1.next();
 							});
 
 
@@ -153,6 +155,7 @@
 							var next3 = document.querySelector('#demo-three .next');
 							var nav3 = new Panels(container3, {
 								slides: ".panel",
+								infinite: false,
 								onSlide: function(to, from){
 									bullets3[from].className = '';
 									bullets3[to].className = 'active';

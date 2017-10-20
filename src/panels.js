@@ -20,9 +20,10 @@ export default class Panels {
     this.options = Object.assign(defaults, options);
     this.container = typeof container === 'string' ? document.querySelector(container) : container;
     this.slides = this.container.querySelectorAll(this.options.slides);
+    this.numSlides = this.slides.length;
     this.current = 0;
 
-    if (!this.slides.length) { return; }
+    if (!this.numSlides) { return; }
   };
 
   /**
@@ -31,20 +32,15 @@ export default class Panels {
    * @return {void}
    */
   go(to) {
-    var options = this.options,
-      slides = this.slides,
-      currentSlide,
-      nextSlide,
-      direction;
-
     // determine direction:  1: backward, -1: forward. Do this before we % it
-    direction = Math.abs(this.current - to) / (this.current - to);
+    const direction = Math.abs(this.current - to) / (this.current - to);
+    const options = this.options;
 
     // calculate where we're going
     if (options.infinite) {
-      to = (slides.length + (to % slides.length)) % slides.length;  // eslint-disable-line no-extra-parens
+      to = (this.numSlides + (to % this.numSlides)) % this.numSlides;  // eslint-disable-line no-extra-parens
     } else {
-      to = Math.max(Math.min(slides.length - 1, to), 0);
+      to = Math.max(Math.min(this.numSlides - 1, to), 0);
     }
 
     // dont do nuthin if we dont need to
@@ -53,30 +49,43 @@ export default class Panels {
     // Call onSlide function, if it exists. Note: doesn't check if is a function
     if (options.onSlide) { options.onSlide.call(this, to, this.current); }
 
+    // do animation
+    this.animate(to, direction);
+    this.current = to;
+  }
 
-    currentSlide = slides[this.current];
-    nextSlide = slides[to];
+  /**
+   * Facilitate slide animation by adding / removing relevant CSS classes.
+   * @param  {Integer} to        The slide index to transition to.
+   * @param  {Integer} direction Positive for forward / negative for reverse.
+   * @return {void}
+   */
+  animate(to, direction) {
+    const slides = this.slides;
+    const currentSlide = slides[this.current];
+    const toSlide = slides[to];
+    const options = this.options;
 
     // prime the slides: position the ones we're going to and moving from
     if (direction > 0) {
-      nextSlide.classList.add(options.beforeClass);
+      toSlide.classList.add(options.beforeClass);
       currentSlide.classList.add(options.afterClass);
     } else {
-      nextSlide.classList.add(options.afterClass);
+      toSlide.classList.add(options.afterClass);
       currentSlide.classList.add(options.beforeClass);
     }
 
     // force a repaint to actually position "to" slide. *Important*
-    nextSlide.offsetHeight;  // eslint-disable-line
+    toSlide.offsetHeight;  // eslint-disable-line
 
     // start the transition
     currentSlide.classList.add(options.animateClass);
-    nextSlide.classList.add(options.animateClass);
-    nextSlide.classList.add(options.activeClass);
+    toSlide.classList.add(options.animateClass);
+    toSlide.classList.add(options.activeClass);
 
     currentSlide.classList.remove(options.activeClass);
-    nextSlide.classList.remove(options.beforeClass);
-    nextSlide.classList.remove(options.afterClass);
+    toSlide.classList.remove(options.beforeClass);
+    toSlide.classList.remove(options.afterClass);
 
     // clean up afterwards
     setTimeout(function() {
@@ -86,9 +95,25 @@ export default class Panels {
         slide.classList.remove(options.afterClass);
       });
     }, options.speed);
-
-    this.current = to;
-
   }
 
+  /**
+   * Go to the next slide
+   * @return {void}
+   */
+  next() {
+    if (this.options.infinite || this.current !== this.numSlides - 1) {
+      this.go(this.current + 1);
+    }
+  }
+
+  /**
+   * Go to the previous slide
+   * @return {void}
+   */
+  prev() {
+    if (this.options.infinite || this.current !== 0) {
+      this.go(this.current - 1);
+    }
+  }
 };
