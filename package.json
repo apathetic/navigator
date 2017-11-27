@@ -2,7 +2,7 @@
   "name": "@hugeinc/panels",
   "description": "A simple navigation object for sliding panels",
   "author": "wes hatch",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "license": "MIT",
   "main": "./dist/panels.cjs.js",
   "broswer": "./dist/panels.js",
