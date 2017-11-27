@@ -13,6 +13,7 @@ export default class Panels {
       afterClass: 'after',
       animateClass: 'animating',
       slides: '.slide',
+      initialPanel: 0,
       infinite: true,
       speed: 400
     };
@@ -21,11 +22,11 @@ export default class Panels {
     this.container = typeof container === 'string' ? document.querySelector(container) : container;
     this.slides = this.container.querySelectorAll(this.options.slides);
     this.numSlides = this.slides.length;
-    this.current = 0;
+    this.current = this.options.initialPanel;
 
     if (!this.numSlides) { return; }
 
-    this.slides[0].classList.add(this.options.activeClass);
+    this.slides[this.current].classList.add(this.options.activeClass);
   };
 
   /**
