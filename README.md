@@ -1,6 +1,8 @@
 # Panels
+[![NPM Version](https://img.shields.io/npm/v/@apatheticwes/panels.svg?style=flat-square)](https://www.npmjs.com/package/@apatheticwes/panels)
+[![License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](https://raw.githubusercontent.com/apathetic/panels/master/LICENSE)
 
-A sliding-panel, carousel-like component that transitions through a series of slides.
+> A sliding-panel, carousel-like component that transitions through a series of slides.
 
 ## Introduction
 
@@ -18,22 +20,29 @@ Download the [production version][min] or the [development version][max].
 Include the relevant scripts in your web page, and then:
 
 ```html
+<!-- sample markup -->
+<ul class="panels">
+  <li class="panel"><h3>Panel 1</h3></li>
+  <li class="panel"><h3>Panel 2</h3></li>
+  <li class="panel"><h3>Panel 3</h3></li>
+  <li class="panel"><h3>Panel 4</h3></li>
+</ul>
+
 <script>
+  // available options
+  var options = {
+    activeClass: 'active',
+    beforeClass: 'before',
+    afterClass: 'after',
+    animateClass: 'animating',
+    slides: '.panel',
+    initialPanel: 0,
+    speed: 400
+  };
 
-	// available options
-	var options = {
-		activeClass: 'active',
-		beforeClass: 'before',
-		afterClass: 'after',
-		animateClass: 'animating',
-		slides: '.step',
-		speed: 400
-	};
-
-	// sample instantiation:
-	var container = document.querySelector('.panels');
-	var nav = new Nav(container, options);
-
+  // sample instantiation:
+  var container = document.querySelector('.panels');
+  var panels = new Panels(container, options);
 </script>
 ```
 
